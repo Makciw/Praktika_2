@@ -1,16 +1,56 @@
 #include "Header.h"
 
-bool is_prime(mpz_class p) {
-	if (p <= 1) return false;
-	if (p == 2) return true;
-	for (mpz_class i = 2; i < sqrt(p) + 1; i++) {
-		if (p % i == 0) return false;
-	}
-	return true;
+set<mpz_class> canonical_dec(mpz_class p_num) {
+    set<mpz_class> divisors;
+    if (p_num == 1) return divisors;
+
+    mpz_class prime_num = p_num;
+    mpz_class i = 2;
+    while (i * i <= prime_num) {
+        if (prime_num % i == 0) {
+            divisors.insert(i);
+            while (prime_num % i == 0) prime_num /= i;
+        }
+        i++;
+    }
+    if (prime_num > 1) divisors.insert(prime_num);
+    return divisors;
+}
+
+bool is_prime(mpz_class prime_num, int t = 6) {
+    if (prime_num == 2) return true;
+    if (prime_num < 2 || prime_num % 2 == 0) return false;
+
+    uniform_int_distribution<int> aj(2, prime_num.get_ui() - 1);
+
+    vector<int> a;
+    set<mpz_class> prime_nums = canonical_dec(prime_num - 1);
+
+    while (a.size() < t) {
+        int a_n = aj(gen);
+        if (count(a.begin(), a.end(), a_n) == 0) {
+            a.push_back(a_n);
+            if (cool_pow(a_n, prime_num - 1, prime_num) != 1) {
+                return false;
+            }
+        }
+    }
+
+    for (auto q : prime_nums) {
+        bool found = false;
+        for (auto i : a) {
+            if (cool_pow(i, (prime_num - 1) / q, prime_num) != 1) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) return false;
+    }
+    return true;
 }
 
 bool Fermat_cond(mpz_class a, mpz_class& p) {
-	return is_prime(p) && (a % p != 0);
+    return is_prime(p) && (a % p != 0);
 }
 
 mpz_class Fermat(mpz_class x, mpz_class a, mpz_class p) {
