@@ -19,7 +19,7 @@ mpz_class find_d(mpz_class c, mpz_class m) {
     tie(gcd, u, v) = extended_gcd(c, m);
 
     if (gcd != 1) {
-        throw runtime_error("Решение не существует: c и m должны быть взаимно просты");
+        throw runtime_error("Р РµС€РµРЅРёРµ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚: c Рё m РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РІР·Р°РёРјРЅРѕ РїСЂРѕСЃС‚С‹");
     }
     else {
         return (u % m + m) % m;
