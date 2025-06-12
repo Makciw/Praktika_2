@@ -14,7 +14,7 @@ bool Fermat_cond(mpz_class a, mpz_class& p) {
 }
 
 mpz_class Fermat(mpz_class x, mpz_class a, mpz_class p) {
-	if (!Fermat_cond(a, p)) throw runtime_error("Ошибка: нарушение условий теоремы Ферма (a и p должны быть взаимно просты)");
+	if (!Fermat_cond(a, p)) throw runtime_error("РћС€РёР±РєР°: РЅР°СЂСѓС€РµРЅРёРµ СѓСЃР»РѕРІРёР№ С‚РµРѕСЂРµРјС‹ Р¤РµСЂРјР° (a Рё p РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РІР·Р°РёРјРЅРѕ РїСЂРѕСЃС‚С‹)");
 	mpz_class result;
 	x %= (p - 1);
 	mpz_powm_sec(result.get_mpz_t(), a.get_mpz_t(), x.get_mpz_t(), p.get_mpz_t());
@@ -49,15 +49,15 @@ void checkInput(mpz_class a, mpz_class x, mpz_class p) {
 	if (cin.fail()) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		throw runtime_error("Ошибка: введены некорректные данные (ожидаются целые числа)");
+		throw runtime_error("РћС€РёР±РєР°: РІРІРµРґРµРЅС‹ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ (РѕР¶РёРґР°СЋС‚СЃСЏ С†РµР»С‹Рµ С‡РёСЃР»Р°)");
 	}
 	if (p <= 1 || !is_prime(p)) {
-		throw runtime_error("Ошибка: p должно быть простым числом > 1");
+		throw runtime_error("РћС€РёР±РєР°: p РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїСЂРѕСЃС‚С‹Рј С‡РёСЃР»РѕРј > 1");
 	}
 	if (a % p == 0) {
-		throw runtime_error("Ошибка: a не должно делиться на p (условие теоремы Ферма)");
+		throw runtime_error("РћС€РёР±РєР°: a РЅРµ РґРѕР»Р¶РЅРѕ РґРµР»РёС‚СЊСЃСЏ РЅР° p (СѓСЃР»РѕРІРёРµ С‚РµРѕСЂРµРјС‹ Р¤РµСЂРјР°)");
 	}
 	if (x < 0) {
-		throw runtime_error("Ошибка: степень x не может быть отрицательной");
+		throw runtime_error("РћС€РёР±РєР°: СЃС‚РµРїРµРЅСЊ x РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕР№");
 	}
 }
