@@ -10,7 +10,7 @@ enum class Task {
 
 int main() {
 	setlocale(LC_ALL, "rus");
-	cout << "Ââåäèòå íîìåð çàäàíèÿ: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ: ";
 	int Task_num;
 	cin >> Task_num;
 
@@ -22,14 +22,14 @@ int main() {
 		while (true) {
 			try {
 				string a_str, x_str, p_str;
-				cout << "Ââåäèòå a, x, p (÷åðåç ïðîáåë): ";
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ a, x, p (Ñ‡ÐµÑ€ÐµÐ· Ð¿Ñ€Ð¾Ð±ÐµÐ»): ";
 				cin >> a_str >> x_str >> p_str;
 
 				mpz_class a(a_str), x(x_str), p(p_str);
 				checkInput(a, x, p);
 
-				cout << "Ðåçóëüòàò (Ôåðìà): " << Fermat(x, a, p) << endl;
-				cout << "Ðåçóëüòàò (áèíàðíîå ðàçëîæåíèå): " << decomposition(to_2(x), a, p) << endl;
+				cout << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑ Ñ‚ÐµÐ°Ñ€ÐµÐ¼Ñƒ Ñ„ÐµÑ€Ð¼Ð°: " << Fermat(x, a, p) << endl;
+				cout << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑ Ð±Ð¸Ð½Ð°Ñ€Ð½Ð¾Ðµ Ñ€Ð°Ð·Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ: " << decomposition(to_2(x), a, p) << endl;
 			}
 			catch (const exception& e) {
 				cerr << e.what() << endl;
@@ -41,27 +41,23 @@ int main() {
 		while (true) {
 			string c_str, m_str;
 
-			cout << "Ââåäèòå ÷èñëî c: ";
-			cin >> c_str;
-
-			cout << "Ââåäèòå ìîäóëü m: ";
-			cin >> m_str;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾ c, m (Ñ‡ÐµÑ€ÐµÐ· Ð¿Ñ€Ð¾Ð±ÐµÐ»): ";
+			cin >> c_str >> m_str;;
 
 			mpz_class c(c_str), m(m_str);
 
 			try {
 				mpz_class d = find_d(c, m);
-				cout << "×èñëî d: " << d << endl;
-				cout << "Ïðîâåðêà: (" << c << " * " << d << ") mod " << m << " = " << (c * d) % m << endl;
+				cout << "Ð§Ð¸ÑÐ»Ð¾ d: " << d << endl;
 			}
 			catch (const invalid_argument& e) {
-				cerr << "Îøèáêà ââîäà: íåäîïóñòèìîå ÷èñëî. " << e.what() << endl;
+				cerr << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°: Ð½ÐµÐ´Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð¼Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾. " << e.what() << endl;
 			}
 			catch (const runtime_error& e) {
-				cerr << "Îøèáêà: " << e.what() << endl;
+				cerr << e.what() << endl;
 			}
 			catch (...) {
-				cerr << "Íåèçâåñòíàÿ îøèáêà." << endl;
+				cerr << "ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°." << endl;
 			}
 		}
 		break;
@@ -71,27 +67,24 @@ int main() {
 		while (true) {
 			string c_str, m_str;
 
-			cout << "Ââåäèòå ÷èñëî c: ";
-			cin >> c_str;
-
-			cout << "Ââåäèòå ìîäóëü m: ";
-			cin >> m_str;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾ c, m (Ñ‡ÐµÑ€ÐµÐ· Ð¿Ñ€Ð¾Ð±ÐµÐ»): ";
+			cin >> c_str >> m_str;
 
 			mpz_class c(c_str), m(m_str);
 
 			try {
 				mpz_class inverse = mod_inverse(c, m);
-				cout << "Îáðàòíûé ýëåìåíò " << c << "^{-1} mod " << m << " = " << inverse << endl;
-				cout << "Ïðîâåðêà: (" << c << " * " << inverse << ") mod " << m << " = " << (c * inverse) % m << endl;
+				cout << "ÐžÐ±Ñ€Ð°Ñ‚Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ " << c << "^{-1} mod " << m << " = " << inverse << endl;
+				cout << "ÃÃ°Ã®Ã¢Ã¥Ã°ÃªÃ : (" << c << " * " << inverse << ") mod " << m << " = " << (c * inverse) % m << endl;
 			}
 			catch (const invalid_argument& e) {
-				cerr << "Îøèáêà ââîäà: íåäîïóñòèìîå ÷èñëî. " << e.what() << endl;
+				cerr << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°: Ð½ÐµÐ´Ð¾Ð¿ÑƒÑÑ‚Ð¸Ð¼Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾. " << e.what() << endl;
 			}
 			catch (const runtime_error& e) {
-				cerr << "Îøèáêà: " << e.what() << endl;
+				cerr << e.what() << endl;
 			}
 			catch (...) {
-				cerr << "Íåèçâåñòíàÿ îøèáêà." << endl;
+				cerr << "ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¾ÑˆÐ¸Ð±ÐºÐ°." << endl;
 			}
 		}
 		break;
@@ -104,7 +97,7 @@ int main() {
 		vector<mpz_class> xgy;
 		string file_name;
 
-		cout << "Ââåäèòå ïóòü äî ôàéëà èëè ìîæåòå âîñïîëüçîâàòüñÿ ãîòîâûì ôàéëîì(C:/Users/makst/source/repos/Praktika2/Praktika2/original_text.txt) : ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿ÑƒÑ‚ÑŒ Ð´Ð¾ Ñ„Ð°Ð¹Ð»Ð° Ð¸Ð»Ð¸ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ Ð²Ð¾ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒÑÑ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹Ð¼ Ñ„Ð°Ð¹Ð»Ð¾Ð¼(C:/Users/makst/source/repos/Praktika2/Praktika2/original_text.txt) : ";
 		cin >> file_name;
 		Read(file_name, letters);
 
@@ -114,28 +107,28 @@ int main() {
 		g = xgy[1];
 		y = xgy[2];
 
-		cout << "Çàøèôðîâàííûé òåêñò õðàíèòüñÿ â ôàéëå: C:/Users/makst/source/repos/Praktika2/Praktika2/output.txt" << endl;
+		cout << "Ð—Ð°ÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ Ñ‚ÐµÐºÑÑ‚ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒÑÑ Ð² Ñ„Ð°Ð¹Ð»Ðµ: C:/Users/makst/source/repos/Praktika2/Praktika2/output.txt" << endl;
 		Encryption_w("output.txt", encryp_letters);
 
 		vector<char> decip_letters = decryption(encryp_letters, p, x);
 
-		cout << "Ðàñøèôðîâàííûé òåêñò õðàíèòüñÿ â ôàéëå: C:/Users/makst/source/repos/Praktika2/Praktika2/res.txt" << endl;
+		cout << "Ð Ð°ÑÑˆÐ¸Ñ„Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ Ñ‚ÐµÐºÑÑ‚ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒÑÑ Ð² Ñ„Ð°Ð¹Ð»Ðµ: C:/Users/makst/source/repos/Praktika2/Praktika2/res.txt" << endl;
 		Decryption_w("res.txt", decip_letters);
 
 		try {
 			mpz_class x_attacked = elgamal_attack(encryp_letters, letters, p, g);
-			cout << "Íàéäåííûé ñåêðåòíûé êëþ÷ x: " << x_attacked << "\n";
-			cout << "Èñòèííûé ñåêðåòíûé êëþ÷ x: " << x << "\n";
+			cout << "ÐÐ°Ð¹Ð´ÐµÐ½Ð½Ñ‹Ð¹ ÑÐµÐºÑ€ÐµÑ‚Ð½Ñ‹Ð¹ ÐºÐ»ÑŽÑ‡ x: " << x_attacked << "\n";
+			cout << "Ð˜ÑÑ‚Ð¸Ð½Ð½Ñ‹Ð¹ ÑÐµÐºÑ€ÐµÑ‚Ð½Ñ‹Ð¹ ÐºÐ»ÑŽÑ‡ x: " << x << "\n";
 
 			if (x_attacked == x) {
-				cout << "Àòàêà óñïåøíà!\n";
+				cout << "ÐÑ‚Ð°ÐºÐ° ÑƒÐ´Ð°Ð»Ð°ÑÑŒ\n";
 			}
 			else {
-				cout << "Àòàêà íå óäàëàñü.\n";
+				cout << ÐÑ‚Ð°ÐºÐ° Ð½Ðµ ÑƒÐ´Ð°Ð»Ð°ÑÑŒ\n";
 			}
 		}
 		catch (const exception& e) {
-			cerr << "Îøèáêà ïðè âûïîëíåíèè àòàêè: " << e.what() << "\n";
+			cerr << e.what() << "\n";
 		}
 
 		break;
@@ -146,8 +139,8 @@ int main() {
 		int A = 1256, B = 847;
 		int a, b;
 		int gcd = extended_gcd(A, B, a, b);
-		if (gcd != 1) cout << "Ðåøåíèÿ íåò" << endl;
-		else cout << "Ðåøåíèå óðàâíåíèÿ: " << A << "*" << a*119 << " + " << B << "*" << b*119 << " = " << gcd*119 << endl;
+		if (gcd != 1) cout << "Ð ÐµÑˆÐµÐ½Ð¸Ñ Ð½ÐµÑ‚" << endl;
+		else cout << "Ð ÐµÑˆÐµÐ½Ð¸Ðµ ÑƒÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ: " << A << "*" << a*119 << " + " << B << "*" << b*119 << " = " << gcd*119 << endl;
 	}
 	default:
 		break;
