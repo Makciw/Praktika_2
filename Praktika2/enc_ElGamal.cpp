@@ -3,7 +3,7 @@
 void Read(string file_name, vector<int>& letters) {
     ifstream file(file_name);
     if (!file) {
-        cerr << "Íå óäàëîñü îòêðûòü ôàéë." << endl;
+        cerr << "ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» " << file_name << endl;
     }
     char letter;
     while (file.get(letter)) {
@@ -17,7 +17,7 @@ void Read(string file_name, vector<int>& letters) {
 void Encryption_w(string file_name, vector<pair<mpz_class, mpz_class>>& letters) {
     ofstream file(file_name);
     if (!file) {
-        cerr << "Íå óäàëîñü îòêðûòü ôàéë.\n";
+        cerr << "ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» " << file_name << endl;
     }
     for (auto i : letters) {
         file << "(" << i.first << " " << i.second << ") ";
@@ -29,7 +29,7 @@ void Encryption_w(string file_name, vector<pair<mpz_class, mpz_class>>& letters)
 void Decryption_w(string file_name, vector<char>& letters) {
     ofstream file(file_name);
     if (!file) {
-        cerr << "Íå óäàëîñü îòêðûòü ôàéë." << endl;
+        cerr << "ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð» " << file_name << endl;
     }
     for (auto i : letters) {
         file << i;
@@ -94,7 +94,7 @@ mpz_class primitive_root(const mpz_class& p) {
         }
     }
 
-    throw runtime_error("Íå óäàëîñü íàéòè ïðèìèòèâíûé êîðåíü ïî ìîäóëþ p");
+    throw runtime_error("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð½Ð°Ð¹Ñ‚Ð¸ Ð¿Ñ€Ð¸Ð¼Ð¸Ñ‚Ð¸Ð²Ð½Ñ‹Ð¹ ÐºÐ¾Ñ€ÐµÐ½ÑŒ Ð¿Ð¾ Ð¼Ð¾Ð´ÑƒÐ»ÑŽ p");
 }
 
 mpz_class generate_x(const mpz_class& p) {
