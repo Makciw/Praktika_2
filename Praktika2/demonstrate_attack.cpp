@@ -15,7 +15,7 @@ mpz_class discrete_log(const mpz_class& g, const mpz_class& h, const mpz_class& 
         current = (current * g) % p;
     }
 
-    throw runtime_error("Дискретный логарифм не найден за " + max_tries.get_str() + " попыток");
+    throw runtime_error("Р”РёСЃРєСЂРµС‚РЅС‹Р№ Р»РѕРіР°СЂРёС„Рј РЅРµ РЅР°Р№РґРµРЅ");
 }
 
 mpz_class elgamal_attack(const vector<pair<mpz_class, mpz_class>>& ciphertexts,
@@ -23,7 +23,7 @@ mpz_class elgamal_attack(const vector<pair<mpz_class, mpz_class>>& ciphertexts,
     const mpz_class& p,
     const mpz_class& g) {
     if (ciphertexts.size() != known_plaintexts.size() || ciphertexts.empty()) {
-        throw invalid_argument("Неверные входные данные для атаки");
+        throw invalid_argument("РќРµРІРµСЂРЅС‹Рµ РґР°РЅРЅС‹Рµ РґР»СЏ Р°С‚Р°РєРё");
     }
 
     size_t idx = 0;
@@ -32,7 +32,7 @@ mpz_class elgamal_attack(const vector<pair<mpz_class, mpz_class>>& ciphertexts,
     }
 
     if (idx == known_plaintexts.size()) {
-        throw runtime_error("Все открытые тексты равны 0");
+        throw runtime_error("РІ С‚РµРєСЃС‚Рµ РЅРµС‚ РґР°РЅРЅС‹С…");
     }
 
     mpz_class u = ciphertexts[idx].first;
@@ -41,17 +41,17 @@ mpz_class elgamal_attack(const vector<pair<mpz_class, mpz_class>>& ciphertexts,
 
     mpz_class m_inv;
     if (!mpz_invert(m_inv.get_mpz_t(), m.get_mpz_t(), p.get_mpz_t())) {
-        throw runtime_error("Не удалось найти обратный элемент для m");
+        throw runtime_error("РќРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё РѕР±СЂР°С‚РЅС‹Р№ СЌР»РµРјРµРЅС‚ РґР»СЏ m");
     }
     mpz_class yk = (v * m_inv) % p;
 
     mpz_class k;
     try {
         k = discrete_log(g, u, p);
-        cout << "Найдено k: " << k << endl;
+        cout << "РќР°Р№РґРµРЅРѕ k: " << k << endl;
     }
     catch (const exception& e) {
-        cerr << "Ошибка при нахождении k: " << e.what() << endl;
+        cerr << "РћС€РёР±РєР° РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё k: " << e.what() << endl;
         throw;
     }
 
@@ -59,7 +59,7 @@ mpz_class elgamal_attack(const vector<pair<mpz_class, mpz_class>>& ciphertexts,
     mpz_class k_inv;
 
     if (!mpz_invert(k_inv.get_mpz_t(), k.get_mpz_t(), phi.get_mpz_t())) {
-        throw runtime_error("k и g(p) не взаимно просты, невозможно найти обратный");
+        throw runtime_error("k Рё g(p) РЅРµ РІР·Р°РёРјРЅРѕ РїСЂРѕСЃС‚С‹");
     }
 
     mpz_class y = cool_pow(yk, k_inv, p);
@@ -67,10 +67,10 @@ mpz_class elgamal_attack(const vector<pair<mpz_class, mpz_class>>& ciphertexts,
     mpz_class x;
     try {
         x = discrete_log(g, y, p);
-        cout << "Найдено x: " << x << endl;
+        cout << "РќР°Р№РґРµРЅРѕ x: " << x << endl;
     }
     catch (const exception& e) {
-        cerr << "Ошибка при нахождении x: " << e.what() << endl;
+        cerr << "РћС€РёР±РєР° РїСЂРё РЅР°С…РѕР¶РґРµРЅРёРё x: " << e.what() << endl;
     }
 
     return x;
