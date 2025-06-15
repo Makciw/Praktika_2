@@ -19,7 +19,8 @@ fun fermatCond(a: Int, p: Int): Boolean {
 
 fun fermat(x: Int, a: Int, p: Int): Int {
     if (!fermatCond(a, p)) throw RuntimeException("Ошибка: нарушение условий теоремы Ферма (a и p должны быть взаимно просты)")
-    return modPow(a, x, p)
+    val n = x % (p - 1)
+    return modPow(a, n, p)
 }
 
 // Быстрое возведение в степень по модулю
@@ -51,10 +52,10 @@ fun decomposition(binary: List<Int>, a: Int, p: Int): Int {
     var result = 1
     var base = a % p
     for (bit in binary) {
+        result = (result * result) % p
         if (bit == 1) {
             result = (result * base) % p
         }
-        base = (base * base) % p
     }
     return result
 }
