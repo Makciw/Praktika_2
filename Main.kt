@@ -58,7 +58,6 @@ fun main() {
 
                     val d = findD(c, m)
                     println("Число d: $d")
-                    println("Проверка: ($c * $d) mod $m = ${(c * d) % m}")
                 } catch (e: IllegalArgumentException) {
                     System.err.println("Ошибка ввода: ${e.message}")
                 } catch (e: Exception) {
@@ -77,7 +76,6 @@ fun main() {
 
                     val inverse = modInverse(c, m)
                     println("Обратный элемент $c^(-1) mod $m = $inverse")
-                    println("Проверка: ($c * $inverse) mod $m = ${(c * inverse) % m}")
                 } catch (e: IllegalArgumentException) {
                     System.err.println("Ошибка: ${e.message}")
                 } catch (e: Exception) {
